@@ -221,8 +221,6 @@ func GetSpell(i int) string {
 
 func TestStructTable_Select(t *testing.T) {
 
-	//fmt.Println(GetSpell(1234567890))
-
 	st, err := NewStructTable(reflect.TypeOf(DummyStruct{}), []string{"VisibleString"})
 	if err != nil {
 		t.Error(err)
@@ -242,10 +240,12 @@ func TestStructTable_Select(t *testing.T) {
 		}
 	}
 
-	ret, err := st.Select("VisibleString == \"two\"", nil, 0, 0)
+	assert.Equal(t, 100, st.Count())
+
+	ret, err := st.Select("VisibleString.contains(\"two\")", nil, 0, 0)
 	assert.NoError(t, err, "there should be no error")
 	assert.NotNilf(t, ret, "should be not nil")
 	for idx, val := range ret {
-		fmt.Printf("%d : %v", idx, val)
+		fmt.Printf("%d : %v\n", idx, val)
 	}
 }

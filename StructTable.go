@@ -268,6 +268,7 @@ func (st *StructTable) Select(where string, orderBy []Order, offset, len int) ([
 	for _, idx := range recIdxs {
 		ret = append(ret, st.dataSet[idx])
 	}
+	// TODO, implement the offset, len and ordering
 	return ret, nil
 }
 
